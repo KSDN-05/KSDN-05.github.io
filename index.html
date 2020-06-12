@@ -1,0 +1,51 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Portfolio</title>
+        <style>
+            .main{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main" id="mainContainer" >
+            <div id="loading">
+                loading...
+            </div>
+           <img id="profileImage"
+            height="200"
+            width="200"
+            >
+            <h1 id="fullName"></h1>
+            <p id="bio"></p>
+            <h2 id="followersInformation"></h2>
+            <p>
+                Check me on <a id="githubLink">Github</a>
+            </p>
+            <p>
+                <a class="twitter-timeline" data-width="400" data-height="400" href="https://twitter.com/keshab29306733?ref_src=twsrc%5Etfw">Tweets by keshab29306733</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </p>
+
+        </div>
+        <script>
+            fetch("https://api.github.com/users/KSDN-05")
+                .then(response=>response.json())
+                .then(function(data))
+                {
+                    console.log(data)
+                    let followersCount=data['followers']
+                    let followersInfo='I have been followed by ${followersCount}awesome people on Github'
+                    document.getElementById('profileImage').src=data['avatar_url']
+                    document.getElementById('fullName').textContent=data['name']
+                    document.getElementById('bio').textContent=data['bio']
+                    document.getElementById('followersInformation').textContent=followersInfo
+                    document.getElementById('githubLink').href=data['html_url']
+
+                       }
+        </script>
+
+      
+    </body> 
+    
+</html>
